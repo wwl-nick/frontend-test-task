@@ -25,4 +25,4 @@ class AppViewSet(viewsets.ModelViewSet):
         return App.objects.filter(author__id=self.request.user.id)
 
     def perform_create(self, serializer):
-        serializer.save(author__id=self.request.user.id)
+        serializer.save(author=self.request.user)
