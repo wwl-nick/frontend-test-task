@@ -1,4 +1,6 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated
 
 from apps.models import Platform, App
@@ -14,6 +16,9 @@ class PlatformViewSet(viewsets.ReadOnlyModelViewSet):
 
 class AppViewSet(viewsets.ModelViewSet):
     serializer_class = AppSerializer
+    filter_backends = (DjangoFilterBackend, SearchFilter)
+    search_fields = ('name',)
+    filterset_fields = ('platform',)
     permission_classes = (IsAuthenticated, OnlyAuthor)
 
     def get_queryset(self):
