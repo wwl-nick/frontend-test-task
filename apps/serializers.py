@@ -11,7 +11,7 @@ class PlatformSerializer(serializers.ModelSerializer):
 
 
 class AppSerializer(serializers.ModelSerializer):
-    platform = serializers.SlugRelatedField(slug_field='name')
+    platform = serializers.SlugRelatedField(slug_field='name', queryset=Platform.objects.all())
     icon = Base64ImageField()
 
     class Meta:
